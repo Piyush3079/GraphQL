@@ -82,7 +82,7 @@ const Query = new GraphQLObjectType({
                     email: {
                         type: GraphQLString
                     }
-                }
+                },
                 resolve(root, args){
                     return Db.models.person.findAll({where: args})
                 }
