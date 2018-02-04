@@ -1,12 +1,14 @@
 import Sequelise from 'sequelise';
-require('dotenv').config();
+import dotenv from 'dotenv';
 import _ from 'lodash';
 import Faker from 'faker';
 
+dotenv.config();
+
 const conn = new Sequelise({
-    process.env.DATABASE,
-    process.env.USERNAME,
-    process.env.PASSWORD,
+    process.env.DATABASE , 
+    process.env.USERNAME , 
+    process.env.PASSWORD , 
     {
         host: 'localhost',
         dialect: 'mysql',
@@ -18,6 +20,14 @@ const conn = new Sequelise({
         }
     }
 })
+
+sequelize.authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
 
 const Person = conn.define('person', {
     firstName: {
@@ -50,3 +60,16 @@ const Post = conn.define('post', {
 
 Person.hasMany(Post);
 Post.belongsTo(Person);
+
+conn.sync({force: true})
+.then(() =>{
+    _.times(10000, ()=> {
+        return Person.create({
+            firstName: Faker.name.firstName(),
+            lastName: Faker.name.lastName(),
+            email: Faker.internet.email()
+        })
+    })
+})
+
+export default conn;
