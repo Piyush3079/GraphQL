@@ -108,10 +108,32 @@ const Mutation = new GraphQLObjectType({
                         email: args.email.toLowerCase()
                     })
                 }
+            },
+            addPost: {
+                type: Post,
+                args: {
+                    title: {
+                        type: new GraphQLNonNull(GraphQLString),
+                    },
+                    content: {
+                        type: new GraphQLNonNull(GraphQLString),
+                    },
+                    personId: {
+                        type: new GraphQLNonNull(GraphQLInt)
+                    }
+                },
+                resolve(root, args){
+                    return Db.models.post.create({
+                        title: args.title,
+                        content: args.content,
+                        personId: args.personId
+                    })
+                }
             }
         }
     }
 })
+
 
 const Query = new GraphQLObjectType({
     name: 'Query',
