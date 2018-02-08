@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon --ignore lib --exec babel-node ./bin/www"
   },
   "dependencies": {
     "babel-preset-node6": "^11.0.0",
@@ -13,6 +13,7 @@
     "dotenv": "^5.0.0",
     "ejs": "~2.5.7",
     "express": "~4.15.5",
+    "express-graphql": "^0.6.11",
     "faker": "^4.1.0",
     "graphql": "^0.12.3",
     "lodash": "^4.17.4",
@@ -22,6 +23,8 @@
     "serve-favicon": "~2.4.5"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "eslint": "^4.17.0",
     "eslint-config-standard": "^11.0.0-beta.0",
     "eslint-plugin-import": "^2.8.0",
