@@ -65,7 +65,7 @@ const Post = conn.define('post', {
 Person.hasMany(Post);
 Post.belongsTo(Person);
 
-conn.sync({force: true})
+/*conn.sync({force: true})
 .then(() =>{
     _.times(500, ()=> {
         return Person.create({
@@ -79,6 +79,6 @@ conn.sync({force: true})
             })
         })
     })
-})
+})*/
 
 export default conn;
